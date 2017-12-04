@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- initate the app with ng-app = "give it a name" -->
+<body ng-app="TodoApp">
+    <section ng-controller="TodoCtrl">
+        <h1>{{ title }}</h1>
+        <div>
+            <input type="text" ng-model="macaroni" />
+            <div> {{ macaroni }} </div>
+          </div>
+          <div>
+              <!-- ng-repeats can be used with arrays and objects -->
+              <!-- todo is a variable and then call the name of the array -->
+                 <!-- Filtering  -->
+            <input type="text" ng-model="searchText" />
+            <!-- repeat button as well as filter -->
+            <!-- I believe the line is just a seperator to do two things in one tag -->
+            <ul ng-repeat="todo in todos | filter: searchText">
+                <!-- write out an if statment -->
+                <li ng-if="todo.complete === 'incomplete'">
+                        {{ todo.name }}
+                        <!-- click is running a function called "KilltoDO" -->
+                        <button ng-click="killTodo(todo)">Finish</button>
+                    </li>
+                <!-- <li>{{todo.complete}}</li> -->
+                </ul>
+          </div>
+          <!-- Begin Grouping -->
+          <div>
+                Grouped tasks:
+                <select
+                    ng-model="theTodo"
+                    ng-options="value.name group by value.complete for value in todos">
+                </select>
+              </div>
+    </section>
+    <script src="lib/node_modules/angular/angular.min.js"></script> 
+    <script src="/app/Todo.js"></script> 
+</body>
+</html>
